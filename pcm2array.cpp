@@ -15,7 +15,9 @@ int main(int argc, char *argv[]) {
 
   short pcm[16];
 
-  printf("short pcm[]={\n");
+  int pcmLen = 0;
+
+  printf("short pcm[] = {\n");
 
   bool isFirst = true;
   while (!feof(inputFile)) {
@@ -23,6 +25,8 @@ int main(int argc, char *argv[]) {
     if (readCount <= 0) {
       break;
     }
+
+    pcmLen += readCount;
 
     for (int i = 0; i < readCount; ++i) {
       if (isFirst) {
@@ -42,6 +46,8 @@ int main(int argc, char *argv[]) {
   }
 
   printf("};\n");
+
+  printf("int pcmLen = %d;\n", pcmLen);
 
   fclose(inputFile);
 
